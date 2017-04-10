@@ -1,7 +1,15 @@
+<div id="my-component"></div>
+
 <template>
     <section>
-        <div>some template markup</div>
+        <div>some template markup inside template</div>
     </section>
 </template>
 
-<div>web components example</div>
+<script>
+    let host = document.querySelector('#My-component');
+    let shadow = host.createShadowRoot();
+    let template = document.querySelector('template');
+
+    shadow.appendChild(document.importNode(template.content, true));
+</script>
