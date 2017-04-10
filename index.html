@@ -1,26 +1,9 @@
-<aside>
-    <div id="my-component"></div>
-</aside>
-
-
-<style>
-    SECTION {
-        color: white;
-        background-color: blue;
-        padding: 10px;
-    }
-
-    /* piercing shadow DOM */
-    #my-component::shadow SECTION {
-        background-color: yellow;
-    }
-
-    /* piercing shadow DOM v2 */
-    #my-component /deep/ h5 {
-        color: orange;
-        font-size: 30px;
-    }
-</style>
+<div id="my-component">
+    <header>COMPONENT HEADER</header>
+    <div>this is projected inside component</div>
+    <section>some section below</section>
+    <img src="http://mariakula.com/wp-content/uploads/2015/01/wloczykij.jpg">
+</div>
 
 <template>
     <style>
@@ -29,9 +12,10 @@
             padding: 10px;
         }
 
-        /* styling by outer context */
-        :host-context(aside) {
-            background-color: orange;
+        /* renamed to ::slotted, but ::content still supported */
+        ::content HEADER {
+            color: blue;
+            text-decoration: underline;
         }
 
         SECTION {
@@ -39,21 +23,23 @@
             border: dashed 2px darkred;
         }
 
+        IMG {
+            display: none;
+        }
     </style>
     <section>
         <div>
-            <h5>template header</h5>
-            some template markup inside template
+            <content select="header"></content>
+            <content select="img"></content>
+            <content></content>
         </div>
     </section>
 </template>
 
-<section>section outside template</section>
+<style>
+    img {
+        width: 50%;
+    }
+</style>
 
-<script>
-    let host = document.querySelector('#My-component');
-    let shadow = host.createShadowRoot();
-    let template = document.querySelector('template');
-
-    shadow.appendChild(document.importNode(template.content, true));
-</script>
+<script src="main.js"></script>
