@@ -1,10 +1,32 @@
 <div id="my-component"></div>
 
+<style>
+    SECTION {
+        color: white;
+        background-color: blue;
+        padding: 10px;
+    }
+</style>
+
 <template>
+    <style>
+        :host {
+            border: solid 2px black;
+            padding: 10px;
+        }
+
+        SECTION {
+            padding: 20px;
+            border: dashed 2px darkred;
+        }
+
+    </style>
     <section>
         <div>some template markup inside template</div>
     </section>
 </template>
+
+<section>section outside template</section>
 
 <script>
     let host = document.querySelector('#My-component');
