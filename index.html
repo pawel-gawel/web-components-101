@@ -10,21 +10,18 @@
         :host {
             border: solid 2px black;
             padding: 10px;
-        }
-
-        /* renamed to ::slotted, but ::content still supported */
-        ::content HEADER {
-            color: blue;
-            text-decoration: underline;
+            /* this is how we introduce css variable */
+            background-color: var(--host-background-color);
         }
 
         SECTION {
             padding: 20px;
-            border: dashed 2px darkred;
+            /* seems not to work in chrome ... */
+            @apply(--component-section-styles);
         }
 
-        IMG {
-            display: none;
+        ::content img {
+            width: 100%;
         }
     </style>
     <section>
@@ -37,8 +34,11 @@
 </template>
 
 <style>
-    img {
-        width: 50%;
+    #my-component {
+        --host-background-color: lightblue;
+        --component-section-styles: {
+            border: dashed 2px pink;
+        }
     }
 </style>
 
