@@ -1,10 +1,24 @@
-<div id="my-component"></div>
+<aside>
+    <div id="my-component"></div>
+</aside>
+
 
 <style>
     SECTION {
         color: white;
         background-color: blue;
         padding: 10px;
+    }
+
+    /* piercing shadow DOM */
+    #my-component::shadow SECTION {
+        background-color: yellow;
+    }
+
+    /* piercing shadow DOM v2 */
+    #my-component /deep/ h5 {
+        color: orange;
+        font-size: 30px;
     }
 </style>
 
@@ -15,6 +29,11 @@
             padding: 10px;
         }
 
+        /* styling by outer context */
+        :host-context(aside) {
+            background-color: orange;
+        }
+
         SECTION {
             padding: 20px;
             border: dashed 2px darkred;
@@ -22,7 +41,10 @@
 
     </style>
     <section>
-        <div>some template markup inside template</div>
+        <div>
+            <h5>template header</h5>
+            some template markup inside template
+        </div>
     </section>
 </template>
 
